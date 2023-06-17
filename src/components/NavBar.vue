@@ -1,5 +1,13 @@
 <script setup>
+import AModal from "./AModal.vue";
+import { ref } from "vue";
 import { RouterLink } from "vue-router";
+
+const modalActive = ref(false);
+
+const toggleModal = () => {
+  modalActive.value = !modalActive.value;
+};
 </script>
 
 <template>
@@ -13,7 +21,12 @@ import { RouterLink } from "vue-router";
     <div class="right-side">
       <input type="text" placeholder="Search a book..." />
       <i></i>
-      <button>Log a book!</button>
+      <AModal @close="toggleModal" :modalActive="modalActive">
+        <div class="modal-content">
+          <h3>demo</h3>
+        </div>
+      </AModal>
+      <button @click="toggleModal">Log a book!</button>
       <div class="user-corner">
         <p>Username</p>
         <img
@@ -85,5 +98,10 @@ button {
   font-weight: bold;
   font-size: 15px;
   border-radius: 10px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #ffbd41;
 }
 </style>
