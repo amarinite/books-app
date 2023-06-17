@@ -1,14 +1,12 @@
-<script>
-export default {
-  props: ["modalActive"],
-  setup(props, { emit }) {
-    const close = () => {
-      emit("close");
-    };
+<script setup>
+import AButton from "./AButton.vue";
+const props = defineProps(["modalActive"]);
 
-    return { close };
-  },
-};
+const emit = defineEmits(["close"]);
+
+function close() {
+  emit("close");
+}
 </script>
 
 <template>
@@ -17,7 +15,7 @@ export default {
       <transition name="modal-animation-inner">
         <div v-if="modalActive" class="modal-inner">
           <slot></slot>
-          <button @click="close">Close</button>
+          <AButton @click="close" :title="'Close'" />
         </div>
       </transition>
     </div>
@@ -39,29 +37,16 @@ export default {
 
 .modal-inner {
   position: relative;
-  max-width: 640px;
+  max-width: 32rem;
   width: 80%;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   background-color: #fff;
-  padding: 64px 16px;
+  border-radius: 10px;
+  padding: 1rem 2rem;
   color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
 }
 </style>
-
-<!-- <script setup>
-import { ref } from "vue";
-
-const props = defineProps(["isLogin"]);
-const visible = ref(false);
-
-const showModal = () => {
-  visible.value = true;
-};
-
-const handleOk = (e) => {
-  console.log(e);
-  visible.value = false;
-};
-
-const title = props.isLogin ? "Login" : "Signup";
-</script> -->

@@ -1,4 +1,5 @@
 <script setup>
+import BooksList from "../components/BooksList.vue";
 const books = [
   {
     image:
@@ -79,13 +80,7 @@ const books = [
       <p>L</p>
     </div>
   </div>
-  <div class="books">
-    <div class="book" v-for="book in books" :key="index">
-      <img :src="book.image" alt="" />
-      <p>{{ book.rating }}</p>
-      <p>{{ book.date }}</p>
-    </div>
-  </div>
+  <BooksList :books="books" />
 </template>
 
 <style scoped>
@@ -106,18 +101,5 @@ const books = [
 
 .top-content h1 {
   color: #2d4744;
-}
-
-.books {
-  margin-top: 3rem;
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-}
-
-.book img {
-  width: 10rem;
-  border-radius: 5px;
-
-  box-shadow: 1px 1px 4px #899e9c;
 }
 </style>

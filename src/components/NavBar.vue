@@ -1,5 +1,6 @@
 <script setup>
 import AModal from "./AModal.vue";
+import AButton from "./AButton.vue";
 import { ref } from "vue";
 import { RouterLink } from "vue-router";
 
@@ -19,14 +20,20 @@ const toggleModal = () => {
       <a href="#">Reading Journal</a>
     </div>
     <div class="right-side">
-      <input type="text" placeholder="Search a book..." />
+      <input class="searchbar" type="text" placeholder="Search a book..." />
       <i></i>
       <AModal @close="toggleModal" :modalActive="modalActive">
-        <div class="modal-content">
-          <h3>demo</h3>
-        </div>
+        <h2>Log a book</h2>
+        <form>
+          <label for="title">Title</label>
+          <input type="text" name="title" />
+          <label for="author">Author</label>
+          <input type="text" name="author" />
+          <label for="finished" name="finished">Finished on</label>
+          <input type="date" />
+        </form>
       </AModal>
-      <button @click="toggleModal">Log a book!</button>
+      <AButton @click="toggleModal" :title="'Log a book!'" />
       <div class="user-corner">
         <p>Username</p>
         <img
@@ -65,7 +72,7 @@ header div {
   color: #fdfffc;
   text-decoration: none;
 }
-.right-side input {
+.searchbar {
   border: none;
   padding: 0.5rem 1rem 0.2rem 1rem;
   color: #fdfffc;
@@ -91,17 +98,8 @@ header div {
   margin-left: 1rem;
 }
 
-button {
-  border: none;
-  background-color: #fdaa10;
-  padding: 0.5rem 1rem;
-  font-weight: bold;
-  font-size: 15px;
-  border-radius: 10px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #ffbd41;
+form {
+  display: flex;
+  flex-direction: column;
 }
 </style>
